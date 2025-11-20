@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- 
+  这是HTML文档的声明，告诉浏览器这是一个HTML5文档
+  语言设置为中文(zh-CN)，有助于搜索引擎优化和屏幕阅读器
+-->
+<head>
+    <!-- 
+      文档头部，包含元数据和链接信息
+      这部分内容不会直接显示在页面上
+    -->
+    <meta charset="UTF-8">
+    <!-- 
+      字符编码设置为UTF-8，确保中文和其他语言正确显示
+      如果删除这行，中文可能会显示为乱码
+    -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+      视口设置，确保网站在手机和电脑上都能正确显示
+      width=device-width: 宽度等于设备宽度
+      initial-scale=1.0: 初始缩放比例为1(不缩放)
+    -->
+    
+    <title>我的GitHub Pages网站</title>
+    <!-- 
+      网页标题，显示在浏览器标签页上
+      修改这里可以改变标签页显示的文字
+    -->
+    
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 
+      从CDN引入Font Awesome图标库
+      这样我们就可以在网站上使用各种图标了
+      如果不需要图标，可以删除这行
+    -->
+    
+    <style>
+        /* 
+          这里是CSS样式部分
+          控制网页的外观和布局
+          你可以修改颜色、字体、大小等
+        */
+        
+        /* 全局重置样式 - 确保在不同浏览器中显示一致 */
+        * {
+            margin: 0;          /* 外边距设为0 */
+            padding: 0;         /* 内边距设为0 */
+            box-sizing: border-box; /* 盒子模型设为border-box，方便计算尺寸 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 设置字体 */
+        }
+
+        /* CSS变量定义 - 方便统一修改颜色 */
+        :root {
+            --primary: #24292e;     /* 主色调 - 深灰色 */
+            --secondary: #0366d6;   /* 次要色调 - 蓝色 */
+            --accent: #28a745;      /* 强调色 - 绿色 */
+            --light: #f6f8fa;       /* 浅色背景 */
+            --dark: #1b1f23;        /* 深色背景 */
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+        }
+
+        /* 页面主体样式 */
+        body {
+            background-color: #f9f9f9; /* 页面背景色 */
+            color: #333;               /* 文字颜色 */
+            line-height: 1.6;          /* 行高，控制文字行间距 */
+        }
+
+        /* 容器样式 - 限制内容宽度并居中 */
+        .container {
+            max-width: 1200px;     /* 最大宽度 */
+            margin: 0 auto;        /* 上下边距为0，左右自动(居中) */
+            padding: 0 20px;       /* 内边距：上下0，左右20px */
+        }
+
+        /* ========== 导航栏样式 ========== */
+        header {
+            background-color: var(--primary); /* 使用CSS变量中的主色调 */
+            color: white;           /* 文字颜色为白色 */
+            padding: 1rem 0;        /* 上下内边距为1rem，左右为0 */
+            position: sticky;       /* 粘性定位，滚动时保持可见 */
+            top: 0;                 /* 距离顶部0 */
+            z-index: 100;           /* 层级，确保导航栏在其他内容之上 */
+            box-shadow: var(--shadow); /* 添加阴影效果 */
+        }
+
+        /* 导航栏布局 */
+        nav {
+            display: flex;              /* 使用Flex布局 */
+            justify-content: space-between; /* 内容两端对齐 */
+            align-items: center;        /* 垂直居中 */
+        }
+
+        /* 网站Logo样式 */
+        .logo {
+            font-size: 1.5rem;     /* 字体大小 */
+            font-weight: bold;     /* 字体粗细 - 粗体 */
+            display: flex;         /* Flex布局 */
+            align-items: center;   /* 垂直居中 */
+            gap: 10px;            /* 子元素之间的间距 */
+        }
+
+        /* 导航链接列表样式 */
+        .nav-links {
+            display: flex;         /* Flex布局 */
+            list-style: none;      /* 去除列表默认样式(点或数字) */
+        }
+
+        /* 导航链接项样式 */
+        .nav-links li {
+            margin-left: 2rem;     /* 左边距，控制链接之间的间距 */
+        }
+
+        /* 导航链接样式 */
+        .nav-links a {
+            color: white;           /* 链接颜色 */
+            text-decoration: none;  /* 去除下划线 */
+            transition: color 0.3s; /* 颜色过渡动画，持续0.3秒 */
+        }
+
+        /* 导航链接悬停效果 */
+        .nav-links a:hover {
+            color: var(--secondary); /* 鼠标悬停时变为次要色调 */
+        }
+
+        /* ========== 英雄区域样式(页面顶部大横幅) ========== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); /* 渐变背景 */
+            color: white;           /* 文字颜色 */
+            padding: 6rem 0;        /* 上下内边距 */
+            text-align: center;     /* 文字居中 */
+        }
+
+        /* 英雄区域主标题 */
+        .hero h1 {
+            font-size: 3rem;        /* 字体大小 */
+            margin-bottom: 1rem;    /* 底部外边距 */
+        }
+
+        /* 英雄区域描述文字 */
+        .hero p {
+            font-size: 1.2rem;      /* 字体大小 */
+            max-width: 700px;       /* 最大宽度 */
+            margin: 0 auto 2rem;    /* 上下外边距，左右自动(居中) */
+        }
+
+        /* 按钮通用样式 */
+        .btn {
+            display: inline-block;   /* 行内块元素 */
+            background-color: var(--accent); /* 背景色使用强调色 */
+            color: white;           /* 文字颜色 */
+            padding: 0.8rem 1.5rem; /* 内边距 */
+            border-radius: 5px;     /* 圆角 */
+            text-decoration: none;  /* 去除下划线 */
+            font-weight: bold;      /* 粗体 */
+            transition: all 0.3s;   /* 所有属性过渡动画 */
+            margin: 0 10px;         /* 外边距 */
+        }
+
+        /* 按钮悬停效果 */
+        .btn:hover {
+            background-color: #218838; /* 悬停时背景色变深 */
+            transform: translateY(-3px); /* 向上移动3像素 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+        }
+
+        /* 轮廓按钮样式 */
+        .btn-outline {
+            background-color: transparent; /* 透明背景 */
+            border: 2px solid white;      /* 白色边框 */
+        }
+
+        /* 轮廓按钮悬停效果 */
+        .btn-outline:hover {
+            background-color: white;      /* 悬停时背景变白色 */
+            color: var(--primary);        /* 文字颜色变主色调 */
+        }
+
+        /* ========== 内容区域通用样式 ========== */
+        .section-title {
+            text-align: center;     /* 文字居中 */
+            margin-bottom: 3rem;    /* 底部外边距 */
+            color: var(--primary);  /* 文字颜色使用主色调 */
+        }
+
+        /* ========== 关于我区域样式 ========== */
+        .about {
+            padding: 5rem 0;        /* 上下内边距 */
+            background-color: white; /* 背景色 */
+        }
+
+        /* 关于我内容布局 */
+        .about-content {
+            display: flex;          /* Flex布局 */
+            align-items: center;    /* 垂直居中 */
+            gap: 3rem;              /* 子元素之间的间距 */
+        }
+
+        /* 关于我文字区域 */
+        .about-text {
+            flex: 1;                /* 占据剩余空间的1份 */
+        }
+
+        /* 关于我图片区域 */
+        .about-image {
+            flex: 1;                /* 占据剩余空间的1份 */
+            border-radius: 10px;    /* 圆角 */
+            overflow: hidden;       /* 内容超出部分隐藏 */
+            box-shadow: var(--shadow); /* 阴影效果 */
+        }
+
+        /* 关于我图片 */
+        .about-image img {
+            width: 100%;            /* 宽度100% */
+            height: auto;           /* 高度自动，保持比例 */
+            display: block;         /* 块级元素 */
+        }
+
+        /* ========== 项目区域样式 ========== */
+        .projects {
+            padding: 5rem 0;        /* 上下内边距 */
+            background-color: #f5f5f5; /* 背景色 */
+        }
+
+        /* 项目网格布局 */
+        .project-grid {
+            display: grid;                              /* 网格布局 */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 自动适应列数，最小300px */
+            gap: 2rem;                                  /* 网格项之间的间距 */
+        }
+
+        /* 项目卡片样式 */
+        .project-card {
+            background-color: white;    /* 背景色 */
+            border-radius: 10px;        /* 圆角 */
+            overflow: hidden;           /* 内容超出部分隐藏 */
+            box-shadow: var(--shadow);  /* 阴影效果 */
+            transition: transform 0.3s; /* 变换过渡动画 */
+        }
+
+        /* 项目卡片悬停效果 */
+        .project-card:hover {
+            transform: translateY(-10px); /* 悬停时向上移动10像素 */
+        }
+
+        /* 项目图片区域 */
+        .project-image {
+            height: 200px;              /* 固定高度 */
+            background-color: var(--secondary); /* 背景色 */
+            display: flex;              /* Flex布局 */
+            align-items: center;        /* 垂直居中 */
+            justify-content: center;    /* 水平居中 */
+            color: white;               /* 文字颜色 */
+            font-size: 1.5rem;          /* 字体大小 */
+        }
+
+        /* 项目内容区域 */
+        .project-content {
+            padding: 1.5rem;            /* 内边距 */
+        }
+
+        /* 项目标题 */
+        .project-content h3 {
+            margin-bottom: 0.5rem;      /* 底部外边距 */
+            color: var(--primary);      /* 文字颜色 */
+        }
+
+        /* 项目链接区域 */
+        .project-links {
+            display: flex;              /* Flex布局 */
+            gap: 1rem;                  /* 子元素之间的间距 */
+            margin-top: 1rem;           /* 顶部外边距 */
+        }
+
+        /* 项目链接样式 */
+        .project-link {
+            display: inline-flex;       /* 行内Flex布局 */
+            align-items: center;        /* 垂直居中 */
+            gap: 5px;                   /* 图标和文字之间的间距 */
+            background-color: var(--light); /* 背景色 */
+            color: var(--primary);      /* 文字颜色 */
+            padding: 0.5rem 1rem;       /* 内边距 */
+            border-radius: 5px;         /* 圆角 */
+            text-decoration: none;      /* 去除下划线 */
+            font-size: 0.9rem;          /* 字体大小 */
+            transition: all 0.3s;       /* 所有属性过渡动画 */
+        }
+
+        /* 项目链接悬停效果 */
+        .project-link:hover {
+            background-color: var(--secondary); /* 背景色变为次要色调 */
+            color: white;               /* 文字颜色变为白色 */
+        }
+
+        /* ========== 技能区域样式 ========== */
+        .skills {
+            padding: 5rem 0;            /* 上下内边距 */
+            background-color: white;    /* 背景色 */
+        }
+
+        /* 技能容器 */
+        .skills-container {
+            display: flex;              /* Flex布局 */
+            flex-wrap: wrap;            /* 允许换行 */
+            gap: 1.5rem;                /* 子元素之间的间距 */
+            justify-content: center;    /* 水平居中 */
+        }
+
+        /* 技能项样式 */
+        .skill-item {
+            background-color: var(--light); /* 背景色 */
+            padding: 1rem 1.5rem;       /* 内边距 */
+            border-radius: 5px;         /* 圆角 */
+            display: flex;              /* Flex布局 */
+            align-items: center;        /* 垂直居中 */
+            gap: 0.5rem;                /* 图标和文字之间的间距 */
+        }
+
+        /* ========== 联系区域样式 ========== */
+        .contact {
+            padding: 5rem 0;            /* 上下内边距 */
+            background-color: var(--primary); /* 背景色 */
+            color: white;               /* 文字颜色 */
+            text-align: center;         /* 文字居中 */
+        }
+
+        /* 联系链接区域 */
+        .contact-links {
+            display: flex;              /* Flex布局 */
+            justify-content: center;    /* 水平居中 */
+            gap: 2rem;                  /* 子元素之间的间距 */
+            margin-top: 2rem;           /* 顶部外边距 */
+        }
+
+        /* 联系链接样式 */
+        .contact-link {
+            color: white;               /* 文字颜色 */
+            font-size: 1.5rem;          /* 字体大小 */
+            transition: color 0.3s;     /* 颜色过渡动画 */
+        }
+
+        /* 联系链接悬停效果 */
+        .contact-link:hover {
+            color: var(--secondary);    /* 悬停时变为次要色调 */
+        }
+
+        /* ========== 页脚样式 ========== */
+        footer {
+            background-color: var(--dark); /* 背景色 */
+            color: white;               /* 文字颜色 */
+            text-align: center;         /* 文字居中 */
+            padding: 2rem 0;            /* 上下内边距 */
+        }
+
+        /* ========== 响应式设计 - 针对手机和平板 ========== */
+        @media (max-width: 768px) {
+            /* 在屏幕宽度小于768px时应用这些样式 */
+            
+            /* 关于我区域改为垂直布局 */
+            .about-content {
+                flex-direction: column; /* 垂直排列 */
+            }
+            
+            /* 英雄区域标题缩小 */
+            .hero h1 {
+                font-size: 2rem;        /* 字体大小 */
+            }
+            
+            /* 导航链接隐藏(在实际项目中可能会替换为汉堡菜单) */
+            .nav-links {
+                display: none;
+            }
+            
+            /* 按钮改为块级元素并设置宽度 */
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+        }
+
+        /* 标签样式 - 用于技能或项目分类 */
+        .tag {
+            display: inline-block;      /* 行内块元素 */
+            background-color: var(--light); /* 背景色 */
+            color: var(--primary);      /* 文字颜色 */
+            padding: 0.3rem 0.8rem;     /* 内边距 */
+            border-radius: 20px;        /* 圆角，形成胶囊形状 */
+            font-size: 0.8rem;          /* 字体大小 */
+            margin-right: 0.5rem;       /* 右边距 */
+            margin-bottom: 0.5rem;      /* 底部外边距 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      页面主体部分，所有可见内容都放在这里
+      我们按照从上到下的顺序组织内容
+    -->
+
+    <!-- ========== 导航栏 ========== -->
+    <header>
+        <div class="container">
+            <nav>
+                <!-- 网站Logo - 修改这里的文字 -->
+                <div class="logo">
+                    <i class="fab fa-github"></i> <!-- GitHub图标 -->
+                    我的作品集 <!-- 网站名称 - 修改这里 -->
+                </div>
+                
+                <!-- 导航链接 -->
+                <ul class="nav-links">
+                    <!-- 修改href的值可以链接到页面不同部分 -->
+                    <li><a href="#home">首页</a></li>        <!-- 链接到首页部分 -->
+                    <li><a href="#about">关于我</a></li>     <!-- 链接到关于我部分 -->
+                    <li><a href="#projects">项目</a></li>    <!-- 链接到项目部分 -->
+                    <li><a href="#skills">技能</a></li>      <!-- 链接到技能部分 -->
+                    <li><a href="#contact">联系我</a></li>   <!-- 链接到联系我部分 -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 英雄区域(页面顶部大横幅) ========== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <!-- 主标题 - 修改这里 -->
+            <h1>欢迎来到我的GitHub Pages网站</h1>
+            
+            <!-- 描述文字 - 修改这里 -->
+            <p>这是一个使用GitHub Pages部署的静态网站示例。你可以基于此模板创建自己的个人网站或作品集。</p>
+            
+            <!-- 按钮 - 修改href和文字 -->
+            <a href="#projects" class="btn">查看我的项目</a>
+            <a href="https://github.com" target="_blank" class="btn btn-outline">访问GitHub</a>
+        </div>
+    </section>
+
+    <!-- ========== 关于我区域 ========== -->
+    <section class="about" id="about">
+        <div class="container">
+            <!-- 区域标题 - 修改这里 -->
+            <h2 class="section-title">关于我</h2>
+            
+            <div class="about-content">
+                <!-- 关于我的文字内容 - 修改这里 -->
+                <div class="about-text">
+                    <p>你好！我是一名充满热情的开发者，专注于创建优雅且高效的Web解决方案。我有丰富的前端和后端开发经验，喜欢学习新技术并解决复杂问题。</p>
+                    <p>在我的职业生涯中，我参与了多个项目，从简单的静态网站到复杂的Web应用程序。我始终追求代码质量和用户体验的最佳平衡。</p>
+                    <p>当我不在编码时，我喜欢阅读技术博客、探索新的开发工具，或者在大自然中徒步旅行。</p>
+                </div>
+                
+                <!-- 个人照片区域 - 替换这里的占位内容 -->
+                <div class="about-image">
+                    <!-- 
+                      这是一个占位图片，你可以替换为自己的图片
+                      替换方法：
+                      1. 将图片文件放在与HTML文件相同的文件夹中
+                      2. 将下面的div替换为：<img src="你的图片文件名.jpg" alt="个人照片">
+                    -->
+                    <div style="background-color: #3498db; height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                        个人照片/头像区域
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 项目区域 ========== -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <!-- 区域标题 - 修改这里 -->
+            <h2 class="section-title">我的项目</h2>
+            
+            <div class="project-grid">
+                <!-- 项目卡片1 - 复制这个结构可以添加更多项目 -->
+                <div class="project-card">
+                    <!-- 项目图片区域 - 替换占位内容 -->
+                    <div class="project-image">
+                        项目截图 <!-- 替换为实际项目截图 -->
+                    </div>
+                    
+                    <!-- 项目内容 -->
+                    <div class="project-content">
+                        <!-- 项目标题 - 修改这里 -->
+                        <h3>个人博客系统</h3>
+                        
+                        <!-- 项目描述 - 修改这里 -->
+                        <p>使用React和Node.js构建的全栈博客应用，支持文章发布、评论和用户管理功能。</p>
+                        
+                        <!-- 项目链接 -->
+                        <div class="project-links">
+                            <!-- GitHub仓库链接 - 修改href -->
+                            <a href="https://github.com/yourusername/blog-system" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> 源代码
+                            </a>
+                            
+                            <!-- 在线演示链接 - 修改href -->
+                            <a href="https://yourblogdemo.netlify.app" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 在线演示
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 项目卡片2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        项目截图 <!-- 替换为实际项目截图 -->
+                    </div>
+                    <div class="project-content">
+                        <h3>电子商务网站</h3> <!-- 修改项目标题 -->
+                        <p>一个响应式的电商平台，具有产品展示、购物车和支付集成功能。</p> <!-- 修改项目描述 -->
+                        <div class="project-links">
+                            <a href="https://github.com/yourusername/ecommerce" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> 源代码
+                            </a>
+                            <a href="https://yourstore.demo.com" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 在线演示
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 项目卡片3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        项目截图 <!-- 替换为实际项目截图 -->
+                    </div>
+                    <div class="project-content">
+                        <h3>任务管理应用</h3> <!-- 修改项目标题 -->
+                        <p>使用Vue.js和Firebase开发的实时任务管理工具，支持团队协作。</p> <!-- 修改项目描述 -->
+                        <div class="project-links">
+                            <a href="https://github.com/yourusername/task-manager" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> 源代码
+                            </a>
+                            <a href="https://yourtaskapp.vercel.app" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 在线演示
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 技能区域 ========== -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <!-- 区域标题 - 修改这里 -->
+            <h2 class="section-title">我的技能</h2>
+            
+            <div class="skills-container">
+                <!-- 技能项 - 复制这个结构可以添加更多技能 -->
+                <div class="skill-item">
+                    <i class="fab fa-html5"></i> <!-- HTML图标 -->
+                    <span>HTML5</span> <!-- 技能名称 - 修改这里 -->
+                </div>
+                
+                <div class="skill-item">
+                    <i class="fab fa-css3-alt"></i> <!-- CSS图标 -->
+                    <span>CSS3</span> <!-- 技能名称 - 修改这里 -->
+                </div>
+                
+                <div class="skill-item">
+                    <i class="fab fa-js"></i> <!-- JavaScript图标 -->
+                    <span>JavaScript</span> <!-- 技能名称 - 修改这里 -->
+                </div>
+                
+                <div class="skill-item">
+                    <i class="fab fa-react"></i> <!-- React图标 -->
+                    <span>React</span> <!-- 技能名称 - 修改这里 -->
+                </div>
+                
+                <div class="skill-item">
+                    <i class="fab fa-node-js"></i> <!-- Node.js图标 -->
+                    <span>Node.js</span> <!-- 技能名称 - 修改这里 -->
+                </div>
+                
+                <div class="skill-item">
+                    <i class="fab fa-git-alt"></i> <!-- Git图标 -->
+                    <span>Git</span> <!-- 技能名称 - 修改这里 -->
+                </div>
+                
+                <div class="skill-item">
+                    <i class="fab fa-python"></i> <!-- Python图标 -->
+                    <span>Python</span> <!-- 技能名称 - 修改这里 -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 联系区域 ========== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <!-- 区域标题 - 修改这里 -->
+            <h2 class="section-title">联系我</h2>
+            
+            <!-- 联系描述 - 修改这里 -->
+            <p>如果你对我的工作感兴趣或想合作，请随时联系我！</p>
+            
+            <div class="contact-links">
+                <!-- 邮箱链接 - 修改href中的邮箱地址 -->
+                <a href="mailto:your-email@example.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> <!-- 邮箱图标 -->
+                </a>
+                
+                <!-- GitHub链接 - 修改href中的GitHub地址 -->
+                <a href="https://github.com/yourusername" class="contact-link">
+                    <i class="fab fa-github"></i> <!-- GitHub图标 -->
+                </a>
+                
+                <!-- LinkedIn链接 - 修改href中的LinkedIn地址 -->
+                <a href="https://linkedin.com/in/yourprofile" class="contact-link">
+                    <i class="fab fa-linkedin"></i> <!-- LinkedIn图标 -->
+                </a>
+                
+                <!-- Twitter链接 - 修改href中的Twitter地址 -->
+                <a href="https://twitter.com/yourusername" class="contact-link">
+                    <i class="fab fa-twitter"></i> <!-- Twitter图标 -->
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 页脚 ========== -->
+    <footer>
+        <div class="container">
+            <!-- 版权信息 - 修改这里 -->
+            <p>&copy; 2023 我的GitHub Pages网站. 所有权利保留.</p>
+            
+            <!-- 页脚备注 - 修改这里 -->
+            <p>使用GitHub Pages部署</p>
+        </div>
+    </footer>
+
+    <!-- 
+      JavaScript代码部分
+      这里添加了一些简单的交互功能
+    -->
+    <script>
+        // 平滑滚动效果 - 点击导航链接时平滑滚动到对应部分
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // 阻止默认的跳转行为
+                
+                // 获取目标元素
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth' // 平滑滚动
+                });
+            });
+        });
+        
+        // 你可以在这里添加更多JavaScript代码
+        // 例如表单验证、动画效果等
+    </script>
+</body>
+</html>
